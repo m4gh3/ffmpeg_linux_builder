@@ -1,0 +1,47 @@
+name: Building ffmpeg libraries for linux
+run-name: ${{ github.actor }} is building ffmpeg libraries for linux using GitHub Actions 🎞️ 🚀
+on:
+  release:
+    types: [created]
+jobs:
+  Build ffmpeg libraries for Linux:
+    runs-on: ubuntu-latest
+    container: debian
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install build deps
+        run: |
+          apt update
+          yes | apt install gcc g++ nasm yasm git pkg-config make cmake ninja-build meson autoconf libtool bzip2 jq curl
+      - name: build libx264
+        run: ./build.sh libx264
+      - name: build libx264
+        run: ./build.sh libx265
+      - name: build libvpx
+        run: ./build.sh libvpx
+      - name: build libfdk-aac
+        run: ./build.sh libfdk-aac
+      - name: build libopus
+        run: ./build.sh libopus
+      - name: build libaom
+        run: ./build.sh libaom
+      - name: build libsvtav1
+        run: ./build.sh libsvtav1
+      - name: build libdav1d
+        run: ./build.sh libdav1d
+      - name: build libvmaf
+        run: ./build.sh libvmaf
+      - name: build ffmpeg libraries
+        run: ./build.sh ffmpeg
+      - name: package ffmpeg libraries for linux
+        run: tar -C build -cjf ffmpeg_libs.tar.bz2 lib
+      - name: upload ffmpeg libraries to release
+        run: |
+          ID=$(jq --raw-output '.release.id' $GITHUB_EVENT_PATH)
+          AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}"
+          CONTENT_LENGTH="Content-Length: $(stat -c%s build/FastVideoDSEncoder)"
+          CONTENT_TYPE="Content-Type:  application/x-bzip2"
+          UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/$ID/assets?name=ffmpeg_libs.tar.bz2"
+          curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_LENGTH" -H "$CONTENT_TYPE" --upload-file "ffmpeg_libs.tar.bz2" "$UPLOAD_URL" 
+      - run: echo "🍏 This job's status is ${{ job.status }}."

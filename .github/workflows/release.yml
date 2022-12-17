@@ -40,7 +40,7 @@ jobs:
         run: |
           ID=$(jq --raw-output '.release.id' $GITHUB_EVENT_PATH)
           AUTH_HEADER="Authorization: token ${{ secrets.GITHUB_TOKEN }}"
-          CONTENT_LENGTH="Content-Length: $(stat -c%s build/FastVideoDSEncoder)"
+          CONTENT_LENGTH="Content-Length: $(stat -c%s ffmpeg_libs.tar.bz2)"
           CONTENT_TYPE="Content-Type:  application/x-bzip2"
           UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/$ID/assets?name=ffmpeg_libs.tar.bz2"
           curl -XPOST -H "$AUTH_HEADER" -H "$CONTENT_LENGTH" -H "$CONTENT_TYPE" --upload-file "ffmpeg_libs.tar.bz2" "$UPLOAD_URL" 

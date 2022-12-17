@@ -1,4 +1,4 @@
-name: Building ffmpeg libraries for linux
+name: Build_ffmpeg_libraries_for_linux
 run-name: ${{ github.actor }} is building ffmpeg libraries for linux using GitHub Actions 🎞️ 🚀
 on:
   release:

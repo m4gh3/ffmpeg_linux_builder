@@ -4,7 +4,7 @@ on:
   release:
     types: [created]
 jobs:
-  Build ffmpeg libraries for Linux:
+  Build_ffmpeg_libraries_for_Linux:
     runs-on: ubuntu-latest
     container: debian
     steps:

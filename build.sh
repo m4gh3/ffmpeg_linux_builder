@@ -98,7 +98,7 @@ case $1 in
 	libvmaf)
 		#libvmaf
 		cd $SRC_PATH && \
-		wget https://github.com/Netflix/vmaf/archive/v2.1.1.tar.gz && \
+		wget https://github.com/Netflix/vmaf/archive/v2.1.1.tar.gz && \
 		tar xvf v2.1.1.tar.gz && \
 		mkdir -p vmaf-2.1.1/libvmaf/build &&\
 		cd vmaf-2.1.1/libvmaf/build && \

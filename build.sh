@@ -2,7 +2,7 @@
 
 SRC_PATH=$(pwd)/src
 BUILD_PATH=$(pwd)/build
-BIN_PATH=$(pwd)/bin
+BIN_PATH=$BUILD_PATH/bin
 PKG_CONFIG_PATH_=$BUILD_PATH/lib/pkgconfig
 JOBS=10
 

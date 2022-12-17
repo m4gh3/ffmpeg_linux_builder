@@ -16,7 +16,7 @@ jobs:
           yes | apt install gcc g++ nasm yasm git pkg-config make cmake ninja-build meson autoconf libtool bzip2 jq curl
       - name: build libx264
         run: ./build.sh libx264
-      - name: build libx264
+      - name: build libx265
         run: ./build.sh libx265
       - name: build libvpx
         run: ./build.sh libvpx
